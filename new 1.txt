@@ -1,0 +1,6 @@
+   user : iemefwpwqshnus
+   pass :fd9d94be2e00b1f1805f6e572b480b396631615e55eba771241355f7409da0c3  
+   hote:ec2-18-206-20-102.compute-1.amazonaws.com  
+port   5432
+bd :d74c0s9sa9vc1n
+   postgres://iemefwpwqshnus:fd9d94be2e00b1f1805f6e572b480b396631615e55eba771241355f7409da0c3@ec2-18-206-20-102.compute-1.amazonaws.com:5432/d74c0s9sa9vc1n

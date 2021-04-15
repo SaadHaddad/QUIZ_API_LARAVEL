@@ -50,6 +50,7 @@ $validator = Validator::make($request->all(), [
 'name' => 'required|string|between:2,100',
 'email' => 'required|string|email|max:100|unique:users',
 'password' => 'required|string|confirmed|min:6',
+ 'numero_ins'=>'required|string|min:10|max:40'
 ]);
 
 if($validator->fails()){

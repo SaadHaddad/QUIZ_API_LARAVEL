@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Questions;
 class QuestionController extends Controller
 {
-    public function getQuestion(){
+    public function index(){
     $question = Questions::all();
     return response()->json(['Question',$question]);
 

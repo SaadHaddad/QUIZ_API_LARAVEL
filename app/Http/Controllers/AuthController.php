@@ -116,7 +116,7 @@ return response()->json([
 ]);
 }
 
-    public function getQuestion(){
+    public function index(){
         $question = Questions::all();
         return response()->json(['Question',$question]);
 

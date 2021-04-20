@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Models\Questions;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -113,5 +114,11 @@ return response()->json([
 'user' => auth()->user()
 ]);
 }
+
+    public function getQuestion(){
+        $question = Questions::all();
+        return response()->json(['Question',$question]);
+
+    }
 
 }

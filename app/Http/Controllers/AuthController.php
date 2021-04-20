@@ -96,6 +96,7 @@ return $this->createNewToken(auth()->refresh());
 * @return \Illuminate\Http\JsonResponse
 */
 public function userProfile() {
+
 return response()->json(auth()->user());
 }
 

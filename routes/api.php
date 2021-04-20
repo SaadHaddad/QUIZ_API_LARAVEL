@@ -13,16 +13,12 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('/login', 'App\Http\Controllers\AuthController@login');
+
+Route::post('login', 'App\Http\Controllers\AuthController@login');
 Route::post('register', 'App\Http\Controllers\AuthController@register');
-Route::group([
-    'middleware' => 'api',
-    'prefix' => 'auth'
 
-], function ($router) {
-
-    Route::post('/logout', 'App\Http\Controllers\AuthController@logout');
-    Route::post('/refresh', 'App\Http\Controllers\AuthController@refresh');
-    Route::get('/user-profile', 'App\Http\Controllers\AuthController@userProfile');
-    Route::resource('/Question', 'App\Http\Controllers\QuestionController');
+Route::group(['middleware' => 'auth.jwt'], function () {
+    Route::get('logout', 'App\Http\Controllers\AuthController@logout');
+    Route::get('Question', 'App\Http\Controllers\QuestionController@index');
+    Route::put('user/{id}', 'App\Http\Controllers\AuthController@Edit');
 });

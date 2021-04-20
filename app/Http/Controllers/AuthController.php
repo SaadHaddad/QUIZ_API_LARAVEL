@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers;
-use App\Models\Questions;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +35,9 @@ return response()->json($validator->errors(), 422);
 
 if (! $token = auth()->attempt($validator->validated())) {
 return response()->json(['error' => 'Unauthorized'], 401);
+
+
+
 }
 
 return $this->createNewToken($token);
@@ -63,6 +65,9 @@ $validator->validated(),
 ['password' => bcrypt($request->password)]
 ));
 
+
+
+
 return response()->json([
 'message' => 'User successfully registered',
 'user' => $user
@@ -81,6 +86,18 @@ auth()->logout();
 return response()->json(['message' => 'User successfully signed out']);
 }
 
+//update score
+public function Edit(Request $request,$id)
+{
+    $user = User::find($id);
+    $old_score = $user->score;
+    $new_score = $old_score + $request->input('score');
+    $user->score = $new_score;
+    $i = $user->save();
+
+
+}
+
 /**
 * Refresh a token.
 *
@@ -96,7 +113,6 @@ return $this->createNewToken(auth()->refresh());
 * @return \Illuminate\Http\JsonResponse
 */
 public function userProfile() {
-
 return response()->json(auth()->user());
 }
 
@@ -115,11 +131,5 @@ return response()->json([
 'user' => auth()->user()
 ]);
 }
-
-    public function index(){
-        $question = Questions::all();
-        return response()->json(['Question',$question]);
-
-    }
 
 }

@@ -8,7 +8,7 @@ class QuestionController extends Controller
 {
     public function index(){
     $question = Questions::all();
-    return response()->json(['Question',$question]);
+    return response()->json($question);
 
     }
     public function show($id)

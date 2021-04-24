@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Questions;
 class QuestionController extends Controller
@@ -11,6 +12,14 @@ class QuestionController extends Controller
     return response()->json($question);
 
     }
+
+    public function userlist(){
+        $user = User::all();
+        return response()->json($user);
+
+    }
+
+
     public function show($id)
     {
         $Question = Questions()->find($id);

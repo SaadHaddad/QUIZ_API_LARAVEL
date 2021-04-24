@@ -93,7 +93,15 @@ public function Edit(Request $request,$id)
     $old_score = $user->score;
     $new_score = $old_score + $request->input('score');
     $user->score = $new_score;
+    echo $user->score;
     $i = $user->save();
+
+}
+
+public function  getScore($id){
+    $user = User::find($id);
+
+    return response()->json(['score', $user->score]);
 
 
 }

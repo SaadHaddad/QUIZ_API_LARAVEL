@@ -19,6 +19,7 @@ Route::post('register', 'App\Http\Controllers\AuthController@register');
 Route::get('users', 'App\Http\Controllers\QuestionController@userlist');
 Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('logout', 'App\Http\Controllers\AuthController@logout');
+    Route::get('Score/{id}', 'App\Http\Controllers\AuthController@getScore');
     Route::get('Question', 'App\Http\Controllers\QuestionController@index');
     Route::put('user/{id}', 'App\Http\Controllers\AuthController@Edit');
 });

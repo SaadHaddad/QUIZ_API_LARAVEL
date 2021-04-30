@@ -40,7 +40,7 @@ class QuestionController extends Controller
                 'success' => false
             ], 400);
         }
-      return $star->start;
+      return  response()->json(['state',$star->start]) ;
 
     }
     public function setState()

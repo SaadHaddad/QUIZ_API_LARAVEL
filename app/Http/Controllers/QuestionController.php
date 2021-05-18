@@ -58,14 +58,6 @@ class QuestionController extends Controller
     public function setState()
     {
         $star = quiz_run::find(1);
-        if(!$star)
-        {
-            $app = new quiz_run;
-            $app->start= 1;
-            $app->id = 1;
-            $app->save();
-
-        }
 
         if ( $star->start ==1)
         {

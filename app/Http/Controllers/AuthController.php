@@ -36,8 +36,6 @@ return response()->json($validator->errors(), 422);
 if (! $token = auth()->attempt($validator->validated())) {
 return response()->json(['error' => 'Unauthorized'], 401);
 
-
-
 }
 
 return $this->createNewToken($token);
@@ -53,7 +51,7 @@ $validator = Validator::make($request->all(), [
 'name' => 'required|string|between:2,100',
 'email' => 'required|string|email|max:100|unique:users',
 'password' => 'required|string|confirmed|min:6',
- 'numero_ins'=>'required|string|min:10|max:40'
+ 'numero_ins'=>'string|min:10|max:40'
 ]);
 
 if($validator->fails()){

@@ -14,13 +14,14 @@ class CreateQuestionTable extends Migration
     public function up()
     {
         Schema::create('question', function (Blueprint $table) {
-            $table->increments('id_q');
+            $table->increments('id');
             $table->string('Question')->unique();
             $table->string('A1');
             $table->string('A2');
             $table->string('A3');
             $table->string('correct');
-            $table->integer('score');
+            $table->integer('score')->default(1);
+            $table->boolean('etat')->default(true);;
             $table->timestamps();
         });
     }

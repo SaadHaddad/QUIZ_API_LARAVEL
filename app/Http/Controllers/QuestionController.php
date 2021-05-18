@@ -6,16 +6,30 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Questions;
 use App\Models\quiz_run;
+use Validator;
+use function GuzzleHttp\Promise\all;
+
 class QuestionController extends Controller
 {
     public function index(){
-    $question = Questions::all();
+   // $question = Questions::all();
+
+
+        $question = Questions::where('etat','1')
+            ->get();
     return response()->json($question);
 
     }
+    public function allQuestion(){
+         $question = Questions::all();
+        return response()->json($question);
+
+    }
+
 
     public function userlist(){
-        $user = User::all();
+        $user = User::orderBy('score', 'DESC')->get();
+
         return response()->json($user);
 
     }
@@ -32,6 +46,7 @@ class QuestionController extends Controller
         }
         return $Question;
     }
+
     public function getState()
     {
         $star = quiz_run::find(1);
@@ -56,5 +71,48 @@ class QuestionController extends Controller
         $star->save();
     }
 
+   public function selectQuestion(Request $request,$id)
+   {
+      $qe = Questions::find($id);
+       if (!$qe) {
+           return response()->json([
+               'success' => false,
+               'message' => 'Sorry, question  with id ' . $id . ' cannot be found.'
+           ], 400);
+       }
+
+      $qe->etat=$request->input('etat');
+      $qe->save();
+       return response()->json([
+           'success' => true,'etat'=>$qe->etat
+       ], 200);
+
+   }
+
+    public function addQuestion(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'Question' => 'required|string|between:2,100',
+            'A1' => 'required|string|between:1,100',
+            'A2' => 'required|string|between:1,100',
+            'A3' => 'required|string|between:1,100',
+            'correct' => 'required|string|between:1,100',
+            'score'=>'integer|min:1|max:4'
+        ]);
+
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $question = Questions::create(array_merge(
+            $validator->validated()
+        ));
+
+
+        return response()->json([
+            'message' => 'User successfully registered',
+            'user' => $question
+        ], 201);
+    }
 
 }

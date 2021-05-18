@@ -13,10 +13,7 @@ class QuestionController extends Controller
 {
     public function index(){
    // $question = Questions::all();
-
-
         $question = Questions::where('etat','1')->orderBy('score', 'ASC')->get();
-
     return response()->json($question);
 
     }
@@ -61,6 +58,15 @@ class QuestionController extends Controller
     public function setState()
     {
         $star = quiz_run::find(1);
+        if(!$star)
+        {
+            $app = new quiz_run;
+            $app->start= 1;
+            $app->id = 1;
+            $app->save();
+
+        }
+
         if ( $star->start ==1)
         {
             $star->start =0;

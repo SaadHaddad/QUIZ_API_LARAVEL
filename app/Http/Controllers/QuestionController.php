@@ -15,20 +15,20 @@ class QuestionController extends Controller
    // $question = Questions::all();
 
 
-        $question = Questions::where('etat','1')
-            ->get();
+        $question = Questions::where('etat','1')->orderBy('score', 'ASC')->get();
+
     return response()->json($question);
 
     }
     public function allQuestion(){
-         $question = Questions::orderBy('score', 'DESC')->get();
+         $question = Questions::orderBy('score', 'ASC')->get();
         return response()->json($question);
 
     }
 
 
     public function userlist(){
-        $user = User::orderBy('score', 'ASC')->get();
+        $user = User::orderBy('score', 'DESC')->get();
 
         return response()->json($user);
 

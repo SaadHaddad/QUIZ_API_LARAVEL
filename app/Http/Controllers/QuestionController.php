@@ -28,7 +28,7 @@ class QuestionController extends Controller
 
 
     public function userlist(){
-        $user = User::orderBy('score', 'DESC')->get();
+        $user = User::orderBy('score', 'ASC')->get();
 
         return response()->json($user);
 

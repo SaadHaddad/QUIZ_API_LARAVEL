@@ -21,7 +21,7 @@ class QuestionController extends Controller
 
     }
     public function allQuestion(){
-         $question = Questions::all();
+         $question = Questions::orderBy('score', 'DESC')->get();
         return response()->json($question);
 
     }
